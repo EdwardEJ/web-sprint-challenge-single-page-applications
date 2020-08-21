@@ -1,14 +1,39 @@
 import React from 'react'
 
+
 export default function Form(props) {
 
+  const {
+    submit,
+    inputChange,
+    checkboxChange,
+    errors,
+  } = props;
+
+  const onSubmit = e => {
+    e.preventDefault()
+    submit()
+  }
+
+  const onInputChange = e => {
+    const { name, value } = e.target
+    inputChange(name, value)
+  }
+
+  const onCheckBoxChange = e => {
+    const { name, checked } = e.target
+    checkboxChange(name, checked)
+  }
+
+
   return (
-
-
-
-    <form>
+    <form onSubmit={onSubmit}>
       <div>
         <h2>Make Your Pizza</h2>
+      </div>
+
+      <div className='errors'>
+        <div>{errors.name}</div>
       </div>
 
       <label>ENTER YOUR NAME&nbsp;
@@ -16,12 +41,13 @@ export default function Form(props) {
           type='text'
           name='name'
           placeholder='name'
+          onChange={onInputChange}
         />
       </label>
 
       <h3>CHOOSE YOUR SIZE</h3>
       <label name='size'>&nbsp;
-          <select>
+          <select onChange={onInputChange}>
           <option value=''>-- Select A Size --</option>
           <option value='small'>10" Small</option>
           <option value='medium'>12" Medium</option>
@@ -35,6 +61,7 @@ export default function Form(props) {
       <input
           type='checkbox'
           name='ham'
+          onChange={onCheckBoxChange}
         />
       </label>
 
@@ -42,6 +69,7 @@ export default function Form(props) {
       <input
           type='checkbox'
           name='beef'
+          onChange={onCheckBoxChange}
         />
       </label>
 
@@ -49,23 +77,26 @@ export default function Form(props) {
       <input
           type='checkbox'
           name='pepperoni'
+          onChange={onCheckBoxChange}
         />
       </label>
 
-      <label>Italian Sausage&nbsp;
+      <label>Sausage&nbsp;
       <input
           type='checkbox'
           name='sausage'
+          onChange={onCheckBoxChange}
         />
       </label>
 
-      <label>SPECIAL INSTRUCTIONS&nbsp;
-      <textarea
+      {/* <label>SPECIAL INSTRUCTIONS&nbsp;
+      <input
           type='text'
-          name='special_instructions'
-          placeholder='special instructions'>
-        </textarea>
-      </label>
+          name='specialInstructions'
+          placeholder='special instructions'
+          onChange={onInputChange}
+        />
+      </label> */}
       <button>Submit</button>
     </form>
   )
