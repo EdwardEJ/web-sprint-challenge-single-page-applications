@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
+import Home from './Home'
 import Form from './Form'
 
 
@@ -9,9 +10,17 @@ const App = () => {
 
   return (
     <>
-      <h1>Lambda Eats</h1>
 
-      <Form />
+      <Switch>
+        <Route path='/pizza'>
+          <Form />
+        </Route>
+
+        <Route path='/'>
+          <Home />
+        </Route>
+
+      </Switch>
     </>
   );
 };
